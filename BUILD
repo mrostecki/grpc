@@ -1886,15 +1886,13 @@ grpc_cc_library(
         "src/core/tsi/alts/zero_copy_frame_protector/alts_zero_copy_grpc_protector.h",
         "src/core/tsi/transport_security_grpc.h",
     ],
-    external_deps = [
-        "libssl",
-    ],
     language = "c++",
     deps = [
         "gpr",
         "grpc_base",
         "grpc_shadow_boringssl",
         "tsi_interface",
+        "@openssl//:openssl-lib",
     ],
 )
 
@@ -1978,9 +1976,6 @@ grpc_cc_library(
         "src/core/tsi/ssl_types.h",
         "src/core/tsi/transport_security_grpc.h",
     ],
-    external_deps = [
-        "libssl",
-    ],
     language = "c++",
     deps = [
         "alts_frame_protector",
@@ -1990,6 +1985,7 @@ grpc_cc_library(
         "grpc_shadow_boringssl",
         "grpc_transport_chttp2_client_insecure",
         "tsi_interface",
+        "@openssl//:openssl-lib",
     ],
 )
 

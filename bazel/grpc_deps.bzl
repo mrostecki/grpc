@@ -27,11 +27,6 @@ def grpc_deps():
     )
 
     native.bind(
-        name = "libssl",
-        actual = "@boringssl//:ssl",
-    )
-
-    native.bind(
         name = "madler_zlib",
         actual = "@zlib//:zlib",
     )
@@ -100,15 +95,6 @@ def grpc_deps():
         name = "opencensus-stats-test",
         actual = "@io_opencensus_cpp//opencensus/stats:test_utils",
     )
-
-    if "boringssl" not in native.existing_rules():
-        http_archive(
-            name = "boringssl",
-            # on the chromium-stable-with-bazel branch
-            # NOTE: This URL generates a tarball containing dynamic date
-            # information, so the sha256 is not consistent.
-            url = "https://boringssl.googlesource.com/boringssl/+archive/afc30d43eef92979b05776ec0963c9cede5fb80f.tar.gz",
-        )
 
     if "zlib" not in native.existing_rules():
         http_archive(

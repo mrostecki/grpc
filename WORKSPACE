@@ -4,6 +4,24 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("//bazel:grpc_deps.bzl", "grpc_deps", "grpc_test_only_deps")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
+GRPC_BUILD_CONTENT = """
+cc_library(
+    name = "openssl-lib",
+    srcs = [
+        "libssl.so.1.1",
+        "libcrypto.so.1.1",
+    ],
+    visibility = ["//visibility:public"],
+    linkstatic = False,
+)
+"""
+
+new_local_repository(
+    name = "openssl",
+    path = "%LIBDIR%",
+    build_file_content = GRPC_BUILD_CONTENT,
+)
+
 grpc_deps()
 
 grpc_test_only_deps()
